@@ -1,0 +1,13 @@
+DL1414pin = Arduino pro mini/micro (Also work on Pro micro)
+Vcc = Vcc
+Gnd = Gnd
+WR = A1
+Addr0 =A3
+Addr1 = A2
+D0 = 2
+D1 = 3
+D2 = 4
+D3 = 5
+D4 = A0
+D5 = 13
+D6 = 6
