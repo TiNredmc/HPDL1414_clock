@@ -21,6 +21,7 @@ void setup() {
   // After powerup some DL1414 modules show random characters
   Serial.begin(9600);
   dl1414.clear();
+  dl1414.writeStringScrolling("USE ONLY UPPER CASE CHARACTER ! FOR HPDL1414 16 SEGS.", 133);
   
 }
 char displaybuffer[4] = {' ', ' ', ' ', ' '};
@@ -41,4 +42,3 @@ void loop() {
   dl1414.writeByte(displaybuffer[3],0 );
   delay(200);
 }
-
