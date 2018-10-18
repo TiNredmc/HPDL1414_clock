@@ -17,9 +17,6 @@ RTC_DS1307 rtc = RTC_DS1307();
 
 int hours = 0;
 int minutes = 0;
-int yea = 0;
-int mon = 0;
-int days = 0;
 
 void setup() {
  Serial.begin(9600);
@@ -29,8 +26,6 @@ void setup() {
 }
 int blinkDisp = 1;
 void loop() {
-  
-  dl1414.clear();
     // Get the time from the DS1307.
     DateTime now = rtc.now();
     // Now set the hours and minutes.
