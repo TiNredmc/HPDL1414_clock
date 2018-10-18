@@ -27,7 +27,7 @@ void setup() {
   dl1414.clear();
  
 }
-
+int blinkDisp = 1;
 void loop() {
   
   dl1414.clear();
@@ -36,29 +36,73 @@ void loop() {
     // Now set the hours and minutes.
     hours = now.hour();
     minutes = now.minute();
-    days = now.day();
-    mon = now.month();
-    yea = now.year();
     
-unsigned int displayValue = hours*100 + minutes;
-String str= String(displayValue);
-String dayS= String(days);
-String monS= String(mon);
-String yeaS= String(yea);
-
-  // Now print the time value to the display.
+int displayValue = hours*100 + minutes;
+ String str = String(displayValue);
  
-  dl1414.writeStringScrolling(str, 120);
-  Serial.print(str);
-  Serial.println("/");
-  dl1414.writeStringScrolling(dayS, 120);
-  Serial.print(dayS);
-  Serial.println("/");
-  dl1414.writeStringScrolling(monS, 120);
-  Serial.print(monS);
-  Serial.println("/");
-  dl1414.writeStringScrolling(yeaS, 120);
-  Serial.print(yeaS);
-  Serial.println("/");
+  if (blinkDisp == 1) {
+    //set the 0 infront of the hour less than 10 AM
+    if ((hours < 10) && (hours >= 0))
+    {
+      str = "   0" + str;
+      int l = str.length() + 1;
+      byte b[l];
+      str.getBytes(b, l);
+      for (int i = 0; i < l - 4; i++) {
+        dl1414.writeByte(3, b[0 + i]);
+        dl1414.writeByte(2, b[1 + i]);
+        dl1414.writeByte(1, b[2 + i]);
+        dl1414.writeByte(0, b[3 + i]);
+      }
+
+    } else
+    {
+      str = "    " + str;
+      int l = str.length() + 1;
+      byte b[l];
+      str.getBytes(b, l);
+      for (int i = 0; i < l - 4; i++) {
+        dl1414.writeByte(3, b[0 + i]);
+        dl1414.writeByte(2, b[1 + i]);
+        dl1414.writeByte(1, b[2 + i]);
+        dl1414.writeByte(0, b[3 + i]);
+      }
+
+      //set the 0 infront of the minute less than 10 minutes
+      if ((minutes < 10) && (minutes >= 0))
+      {
+        str = "  0 " + str;
+        int l = str.length() + 1;
+        byte b[l];
+        str.getBytes(b, l);
+        for (int i = 0; i < l - 4; i++) {
+          dl1414.writeByte(3, b[0 + i]);
+          dl1414.writeByte(2, b[1 + i]);
+          dl1414.writeByte(1, b[2 + i]);
+          dl1414.writeByte(0, b[3 + i]);
+
+        }
+      } else
+      {
+        str = "   0" + str;
+        int l = str.length() + 1;
+        byte b[l];
+        str.getBytes(b, l);
+        for (int i = 0; i < l - 4; i++) {
+          dl1414.writeByte(3, b[0 + i]);
+          dl1414.writeByte(2, b[1 + i]);
+          dl1414.writeByte(1, b[2 + i]);
+          dl1414.writeByte(0, b[3 + i]);
+        }//for line92
+      }//else line86
+    }//else line59
+    blinkDisp = 0 ;
+    delay(500);
+  } else
+  { // blinkDisp line44
+    dl1414.clear();
+    blinkDisp = 1;
+    delay(500);
+  }
 }
 
